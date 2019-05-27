@@ -1,6 +1,6 @@
 class Order
 
-  attr_reader :items
+  attr_reader :items, :placed_at, :time_spent_on_sending_email
   include ItemContainer
 
   def initialize
@@ -8,6 +8,7 @@ class Order
   end
 
   def place
+    @placed_at = Time.now
     thr = Thread.new do
       Pony.mail(
         to: StoreApplication::Admin.email,
@@ -29,5 +30,7 @@ class Order
       puts '.'
       sleep(1)
     end
+    sent_email_at = Time.now
+    @time_spent_on_sending_email = sent_email_at - @placed_at
   end
 end
