@@ -12,3 +12,10 @@ require_relative "order"
 @items << AntiqueItem.new({:price => 101, :weight => 100, :name => "car"})
 @items << RealItem.new({:price => 101, :weight => 100, :name => "kettle"})
 @items << RealItem.new({:price => 101, :weight => 100, :name => "dishwasher"})
+
+cart = Cart.new('kolya')
+cart.add_item RealItem.new({:price => 101, :weight => 100, :name => "car"})
+cart.add_item RealItem.new({:price => 150, :weight => 100, :name => "car"})
+cart.add_item RealItem.new({:price => 170, :weight => 100, :name => "kettle"})
+p cart.all_cars
+p cart.all_kettles
