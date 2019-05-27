@@ -1,7 +1,10 @@
 class Cart
   attr_reader :items
   include ItemContainer
-  class ItemNotSupported < StandartError; end
+
+  class ItemNotSupported < StandardError; end
+
+  UNSUPPORTED_ITEMS = [AntiqueItem, VirtualItem].freeze
 
   def initialize(owner)
     @items = []
@@ -11,17 +14,18 @@ class Cart
   def save_to_file
     File.open("#{@owner}_cart.txt", "w") do |f|
       @items.each do |i|
-        raise ItemNotSupported, if i.class == VirtualItem
+        raise ItemNotSupported if UNSUPPORTED_ITEMS.include?(i.class)
         f.puts i
-       end
+      end
     end
   end
 
-  def read_from_file
-    File.readlines("#{@owner}_cart.txt").each { |i| @items << i.to_real_item }
-    @items.uniq!
-  rescue Errno::ENOENT
-    File.open("#{@owner}_cart.txt", "w") {}
-    puts "file #{@owner}_cart.txt created"
-  end
+	def read_from_file
+		File.readlines("#{@owner}_cart.txt").each { |i| @items << i.to_real_item }
+		@items.uniq!
+	rescue Errno::ENOENT
+		File.open("#{@owner}_cart.txt", "w") {}
+		puts "file #{@owner}_cart.txt created"
+	end
+
 end
