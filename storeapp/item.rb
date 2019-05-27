@@ -1,10 +1,20 @@
 class Item
+  def initialize
+    @price = 30
+  end
+
   def price
-    rand(100)
+    @price
+  end
+
+  def price=(price_value)
+    @price = price_value
   end
 end
 
 item1 = Item.new
-item2 = Item.new
 puts item1.price
-puts item2.price
+item1.price = 10
+puts item1.price
+item1.price = 20
+puts item1.price
