@@ -1,4 +1,3 @@
-require 'dotenv/load'
 class StoreApplication
 
   class << self
@@ -6,17 +5,19 @@ class StoreApplication
     def config
       unless @instance
         yield(self)
+        require 'pony'
         puts 'Loading files..'
-        require_relative "string"
-        require_relative "item_container"
-        require_relative "item"
-        require_relative "virtual_item"
-        require_relative "real_item"
-        require_relative "antique_item"
-        require_relative "cart"
-        require_relative "order"
+        require_relative 'string'
+        require_relative 'item_container'
+        require_relative 'item'
+        require_relative 'virtual_item'
+        require_relative 'real_item'
+        require_relative 'antique_item'
+        require_relative 'cart'
+        require_relative 'order'
       end
       @instance ||= self
+      @instance.freeze
     end
 
     attr_accessor :name, :environment
@@ -34,6 +35,7 @@ class StoreApplication
           yield(self)
         end
         @instance ||= self
+        @instance.freeze
       end
 
       attr_accessor :email, :login
