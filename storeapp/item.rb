@@ -9,6 +9,4 @@ class Item
   attr_writer :price
 end
 
-item1 = Item.new({ :weight => 10, :price => 30})
-puts item1.price
-puts item1.weight
+puts Item.new({ :price => 30 }).price
