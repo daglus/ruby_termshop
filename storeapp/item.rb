@@ -1,5 +1,4 @@
 class Item
-
   @@discount = 0.05
 
   def self.discount
