@@ -19,14 +19,14 @@ describe ItemContainer do
     @item2 = Item.new('kettle', price: 300)
   end
 
-  it 'show minimum price for the item' do
-    IteBox.min_price.should be(100)
-  end
+  # it 'show minimum price for the item' do
+  #   IteBox.min_price.should be(100)
+  # end
 
   it 'adds items into container' do
     @box.add_item(@item1)
     @box.add_item(@item2)
-    @box.items.should have(2).items
+    expect(@box.items.size).to eq(2)
   end
 
   it 'removes item from the box' do
