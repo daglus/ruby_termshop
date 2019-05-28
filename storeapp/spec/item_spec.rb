@@ -21,4 +21,8 @@ describe Item do
   it 'return info about an object' do
     @item.to_s.should == 'kettle:232.0'
   end
+
+  it 'calculates tax' do
+    @item.send(:tax).should_not be_nil
+  end
 end
